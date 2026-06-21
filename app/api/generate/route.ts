@@ -1,27 +1,15 @@
 import { NextResponse } from 'next/server'
 
-export async function POST(req: Request) {
-  const body = await req.json()
+export async function GET() {
+  return NextResponse.json({
+    success: true,
+    message: 'API works',
+  })
+}
 
-  const response = await fetch(
-    'https://api-inference.huggingface.co/models/facebook/musicgen-small',
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.HUGGINGFACE_API_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        inputs: body.prompt,
-      }),
-    }
-  )
-
-  const audioBuffer = await response.arrayBuffer()
-
-  return new Response(audioBuffer, {
-    headers: {
-      'Content-Type': 'audio/wav',
-    },
+export async function POST() {
+  return NextResponse.json({
+    success: true,
+    message: 'POST works',
   })
 }
