@@ -161,3 +161,12 @@ export function googleLoginUrl(): string {
 
   return `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
 }
+
+export type Subscription = {
+  id: string;
+  tier: string;
+  status: string;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  provider?: string;
+};
