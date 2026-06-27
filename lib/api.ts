@@ -183,7 +183,8 @@ export async function apiDelete<T = unknown>(path: string): Promise<T> {
 }
 
 function normalizeAuthResponse(response: ApiEnvelope<AuthPayload> | AuthPayload) {
-  const payload = 'data' in response && response.data ? response.data : response;
+  const envelope = response as ApiEnvelope<AuthPayload>;
+  const payload = (envelope.data ?? response) as AuthPayload;
 
   const accessToken = payload.accessToken || payload.token;
   const user = payload.user;
